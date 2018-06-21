@@ -2,11 +2,13 @@
 ;; housekeeping
   (setq inhibit-startup-message t)
   (tool-bar-mode -1)
-  ;;(menu-bar-mode -1)
+;;(menu-bar-mode -1)
+  (setq frame-title-format "emacs")
   (scroll-bar-mode -1)
   (fset 'yes-or-no-p ' y-or-n-p)
-(global-set-key (kbd "<f5>") 'revert-buffer)
-(setq org-src-fontify-natively t)
+  (global-set-key (kbd "<f5>") 'revert-buffer)
+  (setq org-src-fontify-natively t)
+  (show-paren-mode)
 
 ;; let's user try a package before installing 
 (use-package try
@@ -132,13 +134,17 @@ That is, a string used to represent it on the tab bar."
   :bind ("M-s" . avy-goto-char))
 
 ;; autocomplete using auto-complete
-(use-package auto-complete
-  :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
+;;(use-package auto-complete
+;;  :ensure t
+;;  :init
+;;  (progn
+;;    (ac-config-default)
+;;    (global-auto-complete-mode t)
+;;    ))
+
+(use-package company
+  :ensure t)
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; Themes for Emacs
   (use-package color-theme
@@ -195,18 +201,12 @@ That is, a string used to represent it on the tab bar."
   (smartparens-global-mode 1)
   (smartparens-global-strict-mode 1))
 
-(global-linum-mode 1)
+(global-set-key (kbd "<f9>") 'linum-mode)
 
-(setq py-python-command "/usr/bin/python3")
-;;    (use-package jedi
-;;      :ensure
-;;      :init
-;;      (add-hook 'python-mode-hook 'jedi:ac-setup)
-;;      (add-hook 'python-mode-hook 'jedi:setup)
-;;      (setq jedi:complete-on-dot t)
-;;      (setq jedi:environment-root "jedi"))
-
-    (use-package elpy
-      :ensure t
-      :config
-      (elpy-enable))
+;;(use-package anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+(setq python-shell-interpreter "python3")
+(eval-after-load "company"
+  '(add-to-list 'company-backends 'company-anaconda))
+(add-hook 'python-mode-hook 'anaconda-mode)

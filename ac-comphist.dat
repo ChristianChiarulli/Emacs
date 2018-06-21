@@ -1,44 +1,56 @@
-((("or" .
-   [1 0])
-  (":config" .
-   [1 0 0 0 0 0 0])
-  (":ensure" .
-   [2 0 0 0 0 0 0])
-  ("use-package" .
-   [0 0 0 0 0 0 0 0 0 0 3])
-  ("setq" .
-   [2 0 0 0])
-  ("revert-buffer" .
-   [0 0 0 0 0 0 1 0 0 0 0 0 0])
-  ("kbd" .
-   [0 0 1])
-  ("global-set-key" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 2])
-  ("y-or-n-p" .
-   [0 0 1 0 0 0 0 0])
-  ("yes-or-no-p" .
+((("company-css" .
+   [0 0 0 0 0 0 0 1 0 0 0])
+  ("load-path" .
+   [0 0 0 0 0 0 0 0 1])
+  ("add-to-list" .
    [0 0 0 0 0 0 0 0 0 0 1])
-  ("fset" .
-   [1 0 0 0])
-  ("menu-bar-mode" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 1])
-  ("import" .
-   [0 0 0 0 0 1])
-  ("range" .
-   [0 0 0 1 1])
-  ("random" .
-   [0 0 0 1 0 0])
-  ("jedi" .
-   [1 0 0 0])
-  ("jedi:environment-virtualenv" .
-   [0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("jedi:environment-root" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  (":init" .
-   [1 0 0 0 0])
-  ("require" .
-   [0 0 0 0 0 0 2])
+  ("linum-relative" .
+   [0 0 0 0 0 0 2 0 0 0 0 0 0 0])
   ("linum" .
    [1 0 0 0 1])
-  ("linum-relative" .
-   [0 0 0 0 0 0 2 0 0 0 0 0 0 0])))
+  ("require" .
+   [0 0 0 0 0 0 2])
+  (":init" .
+   [1 0 0 0 0])
+  ("jedi:environment-root" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("jedi:environment-virtualenv" .
+   [0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("jedi" .
+   [1 0 0 0])
+  ("random" .
+   [0 0 0 1 0 0])
+  ("range" .
+   [0 0 0 1 1])
+  ("import" .
+   [0 0 0 0 0 1])
+  ("menu-bar-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("fset" .
+   [1 0 0 0])
+  ("yes-or-no-p" .
+   [0 0 0 0 0 0 0 0 0 0 1])
+  ("y-or-n-p" .
+   [0 0 1 0 0 0 0 0])
+  ("global-set-key" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 2])
+  ("kbd" .
+   [0 0 1])
+  ("revert-buffer" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("setq" .
+   [4 0 0 0])
+  ("use-package" .
+   [0 0 0 0 0 0 0 0 0 0 5])
+  (":ensure" .
+   [2 0 0 0 0 0 0])
+  (":config" .
+   [1 0 0 0 0 0 0])
+  ("or" .
+   [1 0])
+  ("frame-title-format" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("show-paren-m" .
+   [0 0 0 0 0 0 0 1 0 0 0 0])
+  ("show-paren-mode" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])))

@@ -1,5 +1,6 @@
 #import random as r
-import numpy as np
+#import numpy as np
+import math as m
 #def f(x):
 #    return x + 5
 
@@ -14,7 +15,15 @@ def f(x):
 print ("hello")
 h = f(6)
 
-a = np.array([2,3,4])
+#a = np.array([2,3,4])
 
-print(a)
+#print(a)
 
+def h(k):
+    return k * k
+
+j = m.log(6,7)
+
+k = m.atan(j)
+
+print(k)
