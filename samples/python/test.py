@@ -27,3 +27,8 @@ j = m.log(6,7)
 k = m.atan(j)
 
 print(k)
+
+
+    
+
+    

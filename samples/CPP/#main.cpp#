@@ -1,0 +1,15 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+  for (int i = 0; i < 10; ++i) {
+    cout << "coding with snippets is easy" << endl;
+  }
+
+  return 0;
+}
+
+
+

@@ -1,14 +1,19 @@
 
 ;; housekeeping
-  (setq inhibit-startup-message t)
-  (tool-bar-mode -1)
-;;(menu-bar-mode -1)
-  (setq frame-title-format "emacs")
-  (scroll-bar-mode -1)
-  (fset 'yes-or-no-p ' y-or-n-p)
-  (global-set-key (kbd "<f5>") 'revert-buffer)
-  (setq org-src-fontify-natively t)
-  (show-paren-mode)
+    (setq inhibit-startup-message t)
+    (tool-bar-mode -1)
+  ;;(menu-bar-mode -1)
+    (setq frame-title-format "emacs")
+    (scroll-bar-mode -1)
+    (fset 'yes-or-no-p ' y-or-n-p)
+    ;;
+    (setq org-src-fontify-natively t)
+    (show-paren-mode)
+    (fset 'jdent
+        [return return ?\C-p tab])
+    (global-set-key (kbd "C-j") nil)
+    (global-set-key (kbd "C-j") 'jdent)
+;;    (put 'my-macro 'kmacro t)
 
 ;; let's user try a package before installing 
 (use-package try
@@ -145,6 +150,7 @@ That is, a string used to represent it on the tab bar."
 (use-package company
   :ensure t)
 (add-hook 'after-init-hook 'global-company-mode)
+(require 'color)
 
 ;; Themes for Emacs
   (use-package color-theme
