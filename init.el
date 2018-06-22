@@ -16,19 +16,26 @@
 	(package-install 'use-package))
 
   
-(org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/readme.org"))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(minimap-dedicated-window nil)
+ '(minimap-hide-fringes t)
+ '(minimap-major-modes (quote (org-mode prog-mode)))
+ '(minimap-window-location (quote right))
  '(package-selected-packages
    (quote
-    (yasnippet-snippets company-anaconda anaconda-mode zenburn-theme which-key use-package try tabbar smartparens rainbow-delimiters powerline org-bullets neotree jedi flycheck elpy counsel color-theme ample-theme afternoon-theme ace-window)))
+    (minimap sublimity yasnippet-snippets company-anaconda anaconda-mode zenburn-theme which-key use-package try tabbar smartparens rainbow-delimiters powerline org-bullets neotree jedi flycheck elpy counsel color-theme ample-theme afternoon-theme ace-window)))
  '(tabbar-separator (quote (0.5))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 1.0)))))
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 1.0))))
+ '(minimap-active-region-background ((t nil)))
+ '(mode-line ((t (:background "#14151E" :family "Lucida Grande"))))
+ '(powerline-active0 ((t (:inherit mode-line)))))

@@ -162,18 +162,19 @@
    `(cursor ((,class (:background ,orange))))
    `(fringe ((,class (:background ,current-line))))
    `(linum ((,class (:background ,current-line :foreground ,green))))
-   `(border ((,class (:background ,current-line))))
+   `;;(border ((,class (:background ,current-line))))
+   `(border ((,class (nil))))
    `(border-glyph ((,class (nil))))
    `(highlight ((,class (:inverse-video nil :background ,current-line))))
    `(gui-element ((,class (:background ,current-line :foreground ,foreground))))
    `(mode-line ((,class (:foreground nil :background ,current-line
-                                     :box (:line-width 1 :color ,foreground)
+                                     :box nil
                                      :family "Lucida Grande"))))
    `(mode-line-buffer-id ((,class (:foreground ,purple :background nil))))
    `(mode-line-inactive ((,class (:inherit mode-line
                                            :foreground ,comment
                                            :background ,current-line :weight normal
-                                           :box (:line-width 1 :color ,foreground)))))
+                                           :box nil))))
    `(mode-line-emphasis ((,class (:foreground ,foreground :slant italic))))
    `(mode-line-highlight ((,class (:foreground ,purple :box nil))))
    `(minibuffer-prompt ((,class (:foreground ,blue))))
@@ -299,7 +300,7 @@
 
    `(link ((,class (:foreground nil :underline t))))
    `(widget-button ((,class (:underline t))))
-   `(widget-field ((,class (:background ,current-line :box (:line-width 1 :color ,foreground)))))
+   `(widget-field ((,class (:background ,current-line :box ))))
 
    ;; Compilation (most faces politely inherit from 'success, 'error, 'warning etc.)
    `(compilation-column-number ((,class (:foreground ,yellow))))
