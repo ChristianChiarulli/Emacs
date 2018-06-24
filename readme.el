@@ -1,6 +1,7 @@
 
 ;; housekeeping
   (setq inhibit-startup-message t)
+
   (tool-bar-mode -1)
   (set-window-fringes nil 0 0)
 ;;(menu-bar-mode -1)
@@ -17,6 +18,30 @@
   (set-face-attribute 'vertical-border
                     nil
                     :foreground "#282a2e")
+
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+;; (when window-system
+  ;;     (use-package pretty-mode
+    ;;   :ensure t
+      ;; :config
+       ;;(global-pretty-mode t)))
+
+(setq make-backup-files nil)
+(setq auto-save-default t)
+
+(use-package dashboard
+  :ensure t
+  :config
+    (dashboard-setup-startup-hook)
+    (setq dashboard-startup-banner "~/.emacs.d/img/dashLogo.png")
+    ;;(setq dashboard-items '((recents  . 5)
+    ;;                        (projects . 5)))
+    (setq dashboard-banner-logo-title ""))
 
 ;; let's user try a package before installing 
 (use-package try
@@ -56,6 +81,19 @@
     ))
 (windmove-default-keybindings)
 (winner-mode 1)
+(defun split-and-follow-horizontally ()
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+
+(defun split-and-follow-vertically ()
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
 ;; using swiper for search and such
 (use-package counsel
@@ -69,12 +107,12 @@
     (setq ivy-use-virtual-buffers t)
     (setq enable-recursive-minibuffers t)
     (setq ivy-display-style 'fancy)
-    (global-set-key "\C-s" 'swiper)
+    (global-set-key "\M-s" 'swiper)
     (global-set-key (kbd "C-c C-r") 'ivy-resume)
     (global-set-key (kbd "M-x") 'counsel-M-x)
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-    (global-set-key (kbd "C-c g") 'counsel-git)
-    (global-set-key (kbd "C-c j") 'counsel-git-grep)
+    ;;(global-set-key (kbd "C-c g") 'counsel-git)
+    ;;(global-set-key (kbd "C-c j") 'counsel-git-grep)
     (global-set-key (kbd "C-c k") 'counsel-ag)
     (global-set-key (kbd "C-x l") 'counsel-locate)
     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
@@ -83,21 +121,24 @@
 ;; avy jump to things in Emacs tree style using chars
 (use-package avy
   :ensure t
-  :bind ("M-s" . avy-goto-char))
-
-;; autocomplete using auto-complete
-;;(use-package auto-complete
-;;  :ensure t
-;;  :init
-;;  (progn
-;;    (ac-config-default)
-;;    (global-auto-complete-mode t)
-;;    ))
+  :bind ("C-s" . avy-goto-char-2))
+  (global-set-key (kbd "M-g f") 'avy-goto-line)
 
 (use-package company
-  :ensure t)
-(add-hook 'after-init-hook 'global-company-mode)
-(require 'color)
+   :ensure t
+   :config
+   
+   (setq company-idle-delay 0)
+   (setq company-minimum-prefix-length 4))
+   
+(with-eval-after-load 'company
+   (define-key company-active-map (kbd "SPC") #'company-abort)
+   (define-key company-active-map (kbd "M-n") nil)
+   (define-key company-active-map (kbd "M-p") nil)
+   (define-key company-active-map (kbd "C-n") #'company-select-next)
+   (define-key company-active-map (kbd "C-p") #'company-select-previous)
+   )
+ (add-hook 'after-init-hook 'global-company-mode)
 
 ;; Themes for Emacs
   (use-package color-theme
@@ -120,6 +161,7 @@
     :config (load-theme 'afternoon t))
 (set-face-background 'fringe "#181a26")
 (require 'linum nil 'noerror)
+;; possibly messing up highlights
 (set-face-foreground 'linum "#969896")
 
 ;;  (use-package powerline
@@ -141,6 +183,21 @@
     (spaceline-spacemacs-theme))
     (setq spaceline-default-separator nil)
 
+(use-package diminish
+:ensure t
+:init
+(diminish 'which-key-mode)
+(diminish 'linum-relative-mode)
+(diminish 'hungry-delete-mode)
+(diminish 'visual-line-mode)
+(diminish 'subword-mode)
+(diminish 'beacon-mode)
+(diminish 'irony-mode)
+(diminish 'page-break-lines-mode)
+(diminish 'auto-revert-mode)
+(diminish 'rainbow-delimiters-mode)
+(diminish 'rainbow-mode))
+
 (use-package flycheck
   :ensure t
   :init
@@ -149,7 +206,12 @@
 (use-package yasnippet
   :ensure t
   :init
-  (yas-global-mode 1))
+  (yas-global-mode 1)
+  (use-package yasnippet-snippets
+      :ensure t)
+  (yas-reload-all))
+(add-to-list 'org-structure-template-alist
+             '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
 
 (use-package neotree
   :ensure t
@@ -158,8 +220,6 @@
   (global-set-key [f8] 'neotree-toggle))
 ;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
-;; currently out of order
-
 (use-package smartparens
   :ensure t
   :init
@@ -167,18 +227,92 @@
   (smartparens-global-mode 1)
   (smartparens-global-strict-mode 1))
 
+(use-package rainbow-mode
+:ensure t
+:init
+  (add-hook 'prog-mode-hook 'rainbow-mode))
+
+(use-package rainbow-delimiters
+:ensure t
+:init
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
 (global-set-key (kbd "<f9>") 'linum-mode)
 
 (require 'sublimity)
 (require 'sublimity-scroll)
 (sublimity-mode 1)
 
+;; https://www.emacswiki.org/emacs/MiniMap
 (minimap-mode 1)
+(add-hook 'minimap-sb-mode-hook (lambda () (setq mode-line-format nil)))
 
 ;;(use-package anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-(setq python-shell-interpreter "python3")
-(eval-after-load "company"
-  '(add-to-list 'company-backends 'company-anaconda))
-(add-hook 'python-mode-hook 'anaconda-mode)
+;;(add-hook 'python-mode-hook 'anaconda-mode)
+;;(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;;(setq python-shell-interpreter "python3")
+;;(eval-after-load "company"
+;;  '(add-to-list 'company-backends 'company-anaconda))
+;;(add-hook 'python-mode-hook 'anaconda-mode)
+
+(setq line-number-mode t)
+(setq column-number-mode t)
+
+(require 'cc-mode)
+(require 'company)
+(require 'company-c-headers)
+
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+
+(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+(setq company-backends (delete 'company-semantic company-backends))
+
+(add-to-list 'company-backends 'company-c-headers)
+(add-to-list 'company-c-headers-path-system "/usr/bin/../lib/gcc/x86_64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/")  
+;;(add-to-list 'company-c-headers-path-system "/usr/include/c++/7.3.0/")  
+   
+
+(setq company-idle-delay 0)
+;;(define-key c-mode-map [(tab)] 'company-complete)
+;;(define-key c++-mode-map [(tab)] 'company-complete)
+
+
+
+
+ ;; make sure to install libclang-dev
+ ;; also make sure to run irony-install-server
+
+ ;;(require 'company-irony-c-headers)
+ ;; Load with `irony-mode` as a grouped backend
+ ;;(eval-after-load 'company '(add-to-list
+   ;;  'company-backends '(company-irony-c-headers company-irony)))
+
+;;   (require 'company)
+;;   (require 'company-c-headers)
+;;   (add-to-list 'company-backends 'company-c-headers)
+;;   (add-to-list 'company-c-headers-path-system "/usr/include/c++/7")
+
+;; (use-package irony
+;;   :ensure t
+;;   :config
+;;   (add-hook 'c++-mode-hook 'irony-mode)
+;;   (add-hook 'c-mode-hook 'irony-mode)
+;;   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+;; (use-package company-irony
+;;   :ensure t
+;;   :config
+;;   (require 'company)
+;;   (add-to-list 'company-backends 'company-irony))
+
+ ;;(with-eval-after-load 'company
+ ;;  (add-hook 'c++-mode-hook 'company-mode)
+ ;;  (add-hook 'c-mode-hook 'company-mode))
