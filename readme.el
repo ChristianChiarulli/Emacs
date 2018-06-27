@@ -1,10 +1,10 @@
 
 ;; housekeeping
   (setq inhibit-startup-message t)
-
   (tool-bar-mode -1)
   (set-window-fringes nil 0 0)
-;;(menu-bar-mode -1)
+  (menu-bar-mode -1)
+  (global-set-key [f10] 'menu-bar-mode)
   (setq frame-title-format "emacs")
   (scroll-bar-mode -1)
   (fset 'yes-or-no-p ' y-or-n-p)
@@ -15,6 +15,7 @@
       [return return ?\C-p tab])
   (global-set-key (kbd "C-j") nil)
   (global-set-key (kbd "C-j") 'jdent)
+  ;; verticalborder between windows
   (set-face-attribute 'vertical-border
                     nil
                     :foreground "#282a2e")
@@ -58,11 +59,6 @@
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
-;; ido stuff (I now use swiper/counsel)
-;;(setq ido-enable-flex-matching t)
-;;(setq ido-everywhere t)
-;;(ido-mode 1)
 
 ;; for buffers
 ;;(defalias 'list-buffers 'ibuffer)
@@ -140,26 +136,20 @@
    )
  (add-hook 'after-init-hook 'global-company-mode)
 
-;; Themes for Emacs
-  (use-package color-theme
-    :ensure t)
+;; I edited the me directly for the modeline 
+  ;; Themes for Emacs
+  (when (display-graphic-p)
+    (load-theme 'afternoon t)
+    (set-face-background 'fringe "#181a26"))
 
-  ;; This is a variant of zenburn which used to be called darkburn
-  ;;(use-package zenburn-theme
+  ;;(use-package color-theme
+  ;;  :ensure t)
+
+  ;;(use-package afternoon-theme
   ;;  :ensure t
-  ;;  :config (load-theme 'zenburn t))
-  ;;(setq zenburn-override-colors-alist
-  ;;      '(("zenburn-bg" . "#000000")
-          ;;("zenburn-bg+1" . "#111111")
-          ;;("zenburn-bg+2" . "#111111")
-          ;;("zenburn-bg+3" . "#111111")
-          ;;("zenburn-bg+05" . "#111111")
-;;          ))
-  ;;(load-theme 'zenburn t)
-  (use-package afternoon-theme
-    :ensure t
-    :config (load-theme 'afternoon t))
-(set-face-background 'fringe "#181a26")
+  ;;  :config (load-theme 'afternoon t))
+;;(set-face-background 'fringe "#181a26")
+  
 (require 'linum nil 'noerror)
 ;; possibly messing up highlights
 (set-face-foreground 'linum "#969896")
@@ -244,16 +234,16 @@
 (sublimity-mode 1)
 
 ;; https://www.emacswiki.org/emacs/MiniMap
-(minimap-mode 1)
+(global-set-key [f7] 'minimap-mode)
 (add-hook 'minimap-sb-mode-hook (lambda () (setq mode-line-format nil)))
 
-;;(use-package anaconda-mode)
-;;(add-hook 'python-mode-hook 'anaconda-mode)
-;;(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-;;(setq python-shell-interpreter "python3")
-;;(eval-after-load "company"
-;;  '(add-to-list 'company-backends 'company-anaconda))
-;;(add-hook 'python-mode-hook 'anaconda-mode)
+(use-package anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+(setq python-shell-interpreter "python3")
+(eval-after-load "company"
+  '(add-to-list 'company-backends 'company-anaconda))
+(add-hook 'python-mode-hook 'anaconda-mode)
 
 (setq line-number-mode t)
 (setq column-number-mode t)
@@ -276,43 +266,13 @@
 (setq company-backends (delete 'company-semantic company-backends))
 
 (add-to-list 'company-backends 'company-c-headers)
-(add-to-list 'company-c-headers-path-system "/usr/bin/../lib/gcc/x86_64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/")  
-;;(add-to-list 'company-c-headers-path-system "/usr/include/c++/7.3.0/")  
+;;(add-to-list 'company-c-headers-path-system "/usr/bin/../lib/gcc/x86_64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/")  
+(add-to-list 'company-c-headers-path-system "/usr/include/c++/7.3.0/")  
    
 
 (setq company-idle-delay 0)
 ;;(define-key c-mode-map [(tab)] 'company-complete)
 ;;(define-key c++-mode-map [(tab)] 'company-complete)
 
-
-
-
  ;; make sure to install libclang-dev
  ;; also make sure to run irony-install-server
-
- ;;(require 'company-irony-c-headers)
- ;; Load with `irony-mode` as a grouped backend
- ;;(eval-after-load 'company '(add-to-list
-   ;;  'company-backends '(company-irony-c-headers company-irony)))
-
-;;   (require 'company)
-;;   (require 'company-c-headers)
-;;   (add-to-list 'company-backends 'company-c-headers)
-;;   (add-to-list 'company-c-headers-path-system "/usr/include/c++/7")
-
-;; (use-package irony
-;;   :ensure t
-;;   :config
-;;   (add-hook 'c++-mode-hook 'irony-mode)
-;;   (add-hook 'c-mode-hook 'irony-mode)
-;;   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-
-;; (use-package company-irony
-;;   :ensure t
-;;   :config
-;;   (require 'company)
-;;   (add-to-list 'company-backends 'company-irony))
-
- ;;(with-eval-after-load 'company
- ;;  (add-hook 'c++-mode-hook 'company-mode)
- ;;  (add-hook 'c-mode-hook 'company-mode))
