@@ -182,13 +182,14 @@ git clone https://github.com/ChristianChiarulli/Emacs.git .
       (load-theme 'afternoon t)
       (set-face-background 'fringe "#181a26"))
 
-   ;; (use-package color-theme
-   ;;   :ensure t)
+    ;;(use-package color-theme
+    ;;  :ensure t)
 
-  ;;  (use-package afternoon-theme
-  ;;    :ensure t
-  ;;    :config (load-theme 'afternoon t))
+    ;;(use-package afternoon-theme
+    ;;  :ensure t
+    ;;  :config (load-theme 'afternoon t))
   ;;(set-face-background 'fringe "#181a26")
+    
   (require 'linum nil 'noerror)
   ;; possibly messing up highlights
   (set-face-foreground 'linum "#969896")

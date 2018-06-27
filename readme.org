@@ -17,7 +17,7 @@ git clone https://github.com/ChristianChiarulli/Emacs.git .
     (tool-bar-mode -1)
     (set-window-fringes nil 0 0)
     (menu-bar-mode -1)
-    (global-set-key [f10] 'menu-bar-mode)
+    (global-set-key [f8] 'menu-bar-mode)
     (setq frame-title-format "emacs")
     (scroll-bar-mode -1)
     (fset 'yes-or-no-p ' y-or-n-p)
@@ -217,22 +217,57 @@ git clone https://github.com/ChristianChiarulli/Emacs.git .
         (spaceline-spacemacs-theme))
         (setq spaceline-default-separator nil)
   #+end_src
+* Yasnippet
+  -Install more modes from their github
+  #+BEGIN_SRC emacs-lisp
+    (use-package yasnippet
+      :ensure t
+      :config
+      (yas-global-mode 1)
+      (use-package yasnippet-snippets
+          :ensure t)
+      (yas-reload-all))
+    (add-to-list 'org-structure-template-alist
+                 '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+  #+END_SRC
 * Diminish
   #+BEGIN_SRC emacs-lisp
-      (use-package diminish
-      :ensure t
-      :init
-      (diminish 'which-key-mode)
-      (diminish 'linum-relative-mode)
-      (diminish 'hungry-delete-mode)
-      (diminish 'visual-line-mode)
-      (diminish 'subword-mode)
-      (diminish 'beacon-mode)
-      (diminish 'irony-mode)
-      (diminish 'page-break-lines-mode)
-      (diminish 'auto-revert-mode)
-      (diminish 'rainbow-delimiters-mode)
+    (use-package diminish
+    :ensure t
+    :config
+    (with-eval-after-load 'company
+      (diminish 'company-mode))
+    (with-eval-after-load 'which-key
+      (diminish 'which-key-mode))
+    (with-eval-after-load 'linum-relative
+      (diminish 'linum-relative-mode))
+    (with-eval-after-load 'hungry-delete
+      (diminish 'hungry-delete-mode))
+    (with-eval-after-load 'visual-line
+      (diminish 'visual-line-mode))
+    (with-eval-after-load 'subword
+      (diminish 'subword-mode))
+    (with-eval-after-load 'beacon
+      (diminish 'beacon-mode))
+    (with-eval-after-load 'irony
+      (diminish 'irony-mode))
+    (with-eval-after-load 'page-break-lines
+      (diminish 'page-break-lines-mode))
+    (with-eval-after-load 'auto-revert
+      (diminish 'auto-revert-mode))
+    (with-eval-after-load 'rainbow-delimiters
+      (diminish 'rainbow-delimiters-mode))
+    (with-eval-after-load 'rainbow
       (diminish 'rainbow-mode))
+    (with-eval-after-load 'flycheck
+      (diminish 'flycheck-mode))
+    (with-eval-after-load 'yasnippet
+      (diminish 'yasnippet-mode))
+    (with-eval-after-load 'ivy
+      (diminish 'ivy-mode))
+    ;;(with-eval-after-load 'smartparens
+    ;;  (diminish 'smartparens-mode))
+    )
   #+END_SRC
 * Flycheck
   #+BEGIN_SRC emacs-lisp
@@ -242,26 +277,13 @@ git clone https://github.com/ChristianChiarulli/Emacs.git .
       (global-flycheck-mode t))
 
   #+END_SRC
-* Yasnippet
-  -Install more modes from their github
-  #+BEGIN_SRC emacs-lisp
-    (use-package yasnippet
-      :ensure t
-      :init
-      (yas-global-mode 1)
-      (use-package yasnippet-snippets
-          :ensure t)
-      (yas-reload-all))
-    (add-to-list 'org-structure-template-alist
-                 '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
-  #+END_SRC
 * Neotree
   #+BEGIN_SRC emacs-lisp 
     (use-package neotree
       :ensure t
       :config
       (require 'neotree)
-      (global-set-key [f8] 'neotree-toggle))
+      (global-set-key [f6] 'neotree-toggle))
     ;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   #+END_SRC
 * Smartparens
@@ -289,7 +311,7 @@ git clone https://github.com/ChristianChiarulli/Emacs.git .
   #+END_SRC
 * linum
   #+BEGIN_SRC emacs-lisp
-    (global-set-key (kbd "<f9>") 'linum-mode)
+    (global-set-key (kbd "<f5>") 'linum-mode)
   #+END_SRC
 * Sublimity
   #+BEGIN_SRC emacs-lisp 

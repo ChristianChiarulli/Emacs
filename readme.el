@@ -173,29 +173,9 @@
     (spaceline-spacemacs-theme))
     (setq spaceline-default-separator nil)
 
-(use-package diminish
-:ensure t
-:init
-(diminish 'which-key-mode)
-(diminish 'linum-relative-mode)
-(diminish 'hungry-delete-mode)
-(diminish 'visual-line-mode)
-(diminish 'subword-mode)
-(diminish 'beacon-mode)
-(diminish 'irony-mode)
-(diminish 'page-break-lines-mode)
-(diminish 'auto-revert-mode)
-(diminish 'rainbow-delimiters-mode)
-(diminish 'rainbow-mode))
-
-(use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode t))
-
 (use-package yasnippet
   :ensure t
-  :init
+  :config
   (yas-global-mode 1)
   (use-package yasnippet-snippets
       :ensure t)
@@ -203,11 +183,53 @@
 (add-to-list 'org-structure-template-alist
              '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
 
+(use-package diminish
+:ensure t
+:config
+(with-eval-after-load 'company
+  (diminish 'company-mode))
+(with-eval-after-load 'which-key
+  (diminish 'which-key-mode))
+(with-eval-after-load 'linum-relative
+  (diminish 'linum-relative-mode))
+(with-eval-after-load 'hungry-delete
+  (diminish 'hungry-delete-mode))
+(with-eval-after-load 'visual-line
+  (diminish 'visual-line-mode))
+(with-eval-after-load 'subword
+  (diminish 'subword-mode))
+(with-eval-after-load 'beacon
+  (diminish 'beacon-mode))
+(with-eval-after-load 'irony
+  (diminish 'irony-mode))
+(with-eval-after-load 'page-break-lines
+  (diminish 'page-break-lines-mode))
+(with-eval-after-load 'auto-revert
+  (diminish 'auto-revert-mode))
+(with-eval-after-load 'rainbow-delimiters
+  (diminish 'rainbow-delimiters-mode))
+(with-eval-after-load 'rainbow
+  (diminish 'rainbow-mode))
+(with-eval-after-load 'flycheck
+  (diminish 'flycheck-mode))
+(with-eval-after-load 'yasnippet
+  (diminish 'yasnippet-mode))
+(with-eval-after-load 'ivy
+  (diminish 'ivy-mode))
+;;(with-eval-after-load 'smartparens
+;;  (diminish 'smartparens-mode))
+)
+
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode t))
+
 (use-package neotree
   :ensure t
   :config
   (require 'neotree)
-  (global-set-key [f8] 'neotree-toggle))
+  (global-set-key [f6] 'neotree-toggle))
 ;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 (use-package smartparens
@@ -227,7 +249,7 @@
 :init
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(global-set-key (kbd "<f9>") 'linum-mode)
+(global-set-key (kbd "<f5>") 'linum-mode)
 
 (require 'sublimity)
 (require 'sublimity-scroll)
